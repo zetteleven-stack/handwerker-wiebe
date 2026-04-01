@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Fliesenleger Delbrück – Ihr Profi für Fliesenarbeiten, Badsanierung & Naturstein. Qualität die bleibt. Jetzt kostenloses Angebot anfordern."/>
+  <meta name="keywords" content="Fliesenleger Delbrück, Fliesenarbeiten Delbrück, Badsanierung Delbrück, Fliesenleger Paderborn, Fliesen verlegen Bad Küche Terrasse"/>
+  <title>Fliesenleger Delbrück | Fliesenarbeiten vom Profi – Handwerker Wiebe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { font-family: 'Inter', sans-serif; background: #fafaf8; color: #1a1612; line-height: 1.65; overflow-x: hidden; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    :root {
+      --ink:    #1a1612;
+      --dark:   #211d19;
+      --mid:    #6b6258;
+      --warm:   #b0a89e;
+      --cream:  #f4f0ea;
+      --white:  #fdfcfb;
+      --acc:    #b87340;
+      --acc2:   #d4915a;
+      --gold:   #c9a96e;
+      --pad-x:  clamp(1.1rem, 5vw, 2.5rem);
+      --sec:    clamp(3.5rem, 8vw, 7rem);
+      --serif:  'Playfair Display', Georgia, serif;
+      --sans:   'Inter', system-ui, sans-serif;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--pad-x); }
+    .tag { display: inline-block; font-size: .68rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--acc); margin-bottom: .85rem; }
+    .h2  { font-family: var(--serif); font-size: clamp(1.9rem, 5vw, 3.4rem); font-weight: 600; line-height: 1.13; margin-bottom: 1rem; }
+    .lead{ font-size: clamp(.92rem, 2vw, 1.05rem); color: var(--mid); line-height: 1.75; }
+
+    /* reveal */
+    .r  { opacity:0; transform:translateY(22px);  transition:opacity .6s ease,transform .6s ease; }
+    .r2 { opacity:0; transform:translateX(-26px); transition:opacity .6s ease,transform .6s ease; }
+    .r3 { opacity:0; transform:translateX( 26px); transition:opacity .6s ease,transform .6s ease; }
+    .r.on,.r2.on,.r3.on { opacity:1; transform:none; }
+
+    /* ====== NAV ====== */
+    #nav {
+      position:fixed; top:0; left:0; right:0; z-index:200;
+      padding:1rem var(--pad-x);
+      transition:background .4s, padding .4s, box-shadow .4s;
+    }
+    #nav.solid {
+      background:rgba(26,22,18,.95);
+      backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+      padding:.65rem var(--pad-x);
+      box-shadow:0 2px 24px rgba(0,0,0,.3);
+    }
+    .nw { display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+    .nb { line-height:1.15; }
+    .nb .n1 { font-family:var(--serif); font-size:1.2rem; color:#fff; font-weight:600; }
+    .nb .n2 { font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); }
+    .nl { display:flex; gap:2rem; }
+    .nl a { font-size:.78rem; letter-spacing:.06em; color:rgba(255,255,255,.7); transition:color .2s; }
+    .nl a:hover { color:var(--gold); }
+    .nl .ncta { padding:.55rem 1.3rem; background:var(--acc); color:#fff!important; border-radius:2px; transition:background .2s!important; }
+    .nl .ncta:hover { background:var(--acc2)!important; }
+
+    .brg { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; }
+    .brg span { display:block; width:24px; height:2px; background:#fff; transition:.3s; }
+    .brg.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .brg.open span:nth-child(2){opacity:0;}
+    .brg.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+    #drw {
+      display:none; position:fixed; inset:0; z-index:190;
+      background:var(--dark); flex-direction:column;
+      align-items:center; justify-content:center; gap:2.5rem;
+    }
+    #drw.open { display:flex; }
+    #drw a { font-family:var(--serif); font-size:1.75rem; color:#fff; }
+    #drw a:hover { color:var(--gold); }
+
+    /* ====== HERO ====== */
+    #hero { position:relative; min-height:100svh; display:flex; align-items:flex-end; overflow:hidden; }
+    #hero-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; }
+    .ho {
+      position:absolute; inset:0;
+      background:linear-gradient(to top, rgba(15,11,8,.9) 0%, rgba(15,11,8,.48) 45%, rgba(15,11,8,.15) 100%);
+    }
+    .hc { position:relative; z-index:2; padding-bottom:clamp(3rem,7vw,5.5rem); max-width:800px; }
+    .hchip {
+      display:inline-flex; align-items:center; gap:.5rem;
+      border:1px solid rgba(201,169,110,.5); border-radius:2px;
+      padding:.4rem .9rem; margin-bottom:1.4rem;
+      font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gold);
+    }
+    .hchip::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--gold); }
+    .hh1 {
+      font-family:var(--serif); font-size:clamp(2.3rem,8vw,5rem);
+      font-weight:600; color:#fff; line-height:1.1; margin-bottom:1rem;
+    }
+    .hh1 em { font-style:italic; color:var(--gold); }
+    .hsub { font-size:clamp(.92rem,2vw,1.1rem); color:rgba(255,255,255,.72); max-width:500px; margin-bottom:2rem; line-height:1.75; }
+    .hbtns { display:flex; gap:.85rem; flex-wrap:wrap; }
+    .bta {
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.9rem 1.75rem; background:var(--acc); color:#fff;
+      font-size:.82rem; font-weight:500; letter-spacing:.06em;
+      border-radius:2px; transition:background .22s,transform .2s;
+    }
+    .bta:hover { background:var(--acc2); transform:translateY(-2px); }
+    .btb {
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.9rem 1.75rem; border:1px solid rgba(255,255,255,.38);
+      color:rgba(255,255,255,.85); font-size:.82rem; letter-spacing:.06em;
+      border-radius:2px; transition:border-color .22s,color .22s;
+    }
+    .btb:hover { border-color:var(--gold); color:var(--gold); }
+
+    /* ====== TRUST ====== */
+    #trust { background:var(--dark); padding:1.35rem 0; }
+    .trow { display:flex; align-items:center; flex-wrap:wrap; gap:.65rem 1.35rem; justify-content:center; }
+    .ti   { display:flex; align-items:center; gap:.5rem; color:rgba(255,255,255,.65); font-size:.78rem; }
+    .ti svg { color:var(--gold); flex-shrink:0; }
+    .ts   { width:1px; height:18px; background:rgba(255,255,255,.12); flex-shrink:0; }
+
+    /* ====== LEISTUNGEN ====== */
+    #leis { padding:var(--sec) 0; background:var(--white); }
+    .lh { display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:end; margin-bottom:3rem; }
+    .lg { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:#ddd; border:2px solid #ddd; }
+    .lc { background:var(--white); overflow:hidden; transition:background .35s; }
+    .lc:hover .li img { transform:scale(1.05); }
+    .lc:hover .lb     { background:var(--dark); }
+    .lc:hover .lb h3,
+    .lc:hover .lb p   { color:rgba(255,255,255,.85); }
+    .lc:hover .lic    { background:var(--acc); color:#fff; }
+    .li { aspect-ratio:4/3; overflow:hidden; }
+    .li img { width:100%; height:100%; object-fit:cover; transition:transform .55s ease; }
+    .lb { padding:1.4rem; transition:background .35s; }
+    .lic {
+      width:38px; height:38px; border-radius:50%;
+      background:var(--cream); display:flex; align-items:center; justify-content:center;
+      color:var(--acc); margin-bottom:.8rem; transition:background .35s,color .35s;
+    }
+    .lb h3 { font-family:var(--serif); font-size:1.15rem; margin-bottom:.4rem; transition:color .35s; }
+    .lb p  { font-size:.82rem; color:var(--mid); line-height:1.7; transition:color .35s; }
+
+    /* ====== VORTEILE ====== */
+    #vort { padding:var(--sec) 0; background:var(--cream); }
+    .vi { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
+    .vv { position:relative; }
+    .vm { width:100%; aspect-ratio:3/4; border-radius:10px; overflow:hidden; }
+    .vm img { width:100%; height:100%; object-fit:cover; }
+    .vth {
+      position:absolute; bottom:-1.25rem; left:-1.25rem;
+      width:140px; aspect-ratio:1; border-radius:8px; overflow:hidden;
+      border:3px solid var(--white); box-shadow:0 10px 36px rgba(0,0,0,.18);
+    }
+    .vth img { width:100%; height:100%; object-fit:cover; }
+    .vbdg {
+      position:absolute; top:-1rem; right:-1rem;
+      width:68px; height:68px; border-radius:50%;
+      background:var(--acc); color:#fff;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      box-shadow:0 6px 18px rgba(184,115,64,.45);
+    }
+    .vbdg .big { font-family:var(--serif); font-size:1.25rem; font-weight:700; line-height:1; }
+    .vbdg .sm  { font-size:.52rem; letter-spacing:.1em; text-transform:uppercase; }
+
+    .vlist { display:flex; flex-direction:column; gap:1.65rem; }
+    .vit   { display:flex; gap:1rem; align-items:flex-start; }
+    .vnum  { font-family:var(--serif); font-size:2rem; font-weight:400; color:var(--acc); line-height:1; flex-shrink:0; min-width:2rem; text-align:right; }
+    .vit h3 { font-family:var(--serif); font-size:1.15rem; margin-bottom:.3rem; }
+    .vit p  { font-size:.83rem; color:var(--mid); line-height:1.7; }
+
+    /* ====== GALERIE ====== */
+    #gal { padding:var(--sec) 0; background:var(--dark); }
+    #gal .h2  { color:#fff; }
+    #gal .tag { color:var(--gold); }
+    #gal .lead{ color:rgba(255,255,255,.55); }
+    .gh { display:flex; justify-content:space-between; align-items:flex-end; gap:1.5rem; margin-bottom:2.25rem; flex-wrap:wrap; }
+    .gg {
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      grid-template-rows:280px 230px;
+      gap:6px;
+    }
+    .gi { overflow:hidden; border-radius:4px; position:relative; cursor:pointer; }
+    .gi img { width:100%; height:100%; object-fit:cover; transition:transform .55s ease; }
+    .gi:hover img { transform:scale(1.06); }
+    .gio {
+      position:absolute; inset:0;
+      background:rgba(184,115,64,.3);
+      display:flex; align-items:center; justify-content:center;
+      opacity:0; transition:opacity .3s; color:#fff;
+    }
+    .gi:hover .gio { opacity:1; }
+    .glbl {
+      position:absolute; bottom:0; left:0; right:0;
+      background:linear-gradient(to top,rgba(0,0,0,.75),transparent);
+      padding:.85rem .75rem .6rem;
+      font-size:.73rem; color:rgba(255,255,255,.9);
+      opacity:0; transform:translateY(5px); transition:opacity .3s,transform .3s;
+    }
+    .gi:hover .glbl { opacity:1; transform:none; }
+    .g1{grid-column:1/6;  grid-row:1/2;}
+    .g2{grid-column:6/9;  grid-row:1/2;}
+    .g3{grid-column:9/13; grid-row:1/3;}
+    .g4{grid-column:1/4;  grid-row:2/3;}
+    .g5{grid-column:4/9;  grid-row:2/3;}
+
+    /* ====== ABLAUF ====== */
+    #abl { padding:var(--sec) 0; background:var(--white); }
+    .ah { text-align:center; margin-bottom:3rem; }
+    .ah .lead { max-width:500px; margin:0 auto; }
+    .ag { display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative; }
+    .ag::before {
+      content:''; position:absolute;
+      top:2rem; left:12.5%; right:12.5%;
+      height:1px; background:linear-gradient(to right,transparent,var(--acc),transparent);
+    }
+    .as { display:flex; flex-direction:column; align-items:center; text-align:center; padding:0 1.1rem; }
+    .anum {
+      width:4rem; height:4rem; border-radius:50%;
+      border:1.5px solid var(--acc); color:var(--acc);
+      font-family:var(--serif); font-size:1.3rem;
+      display:flex; align-items:center; justify-content:center;
+      background:var(--white); position:relative; z-index:1; margin-bottom:1.25rem;
+    }
+    .as h3 { font-family:var(--serif); font-size:1.1rem; margin-bottom:.4rem; }
+    .as p  { font-size:.82rem; color:var(--mid); line-height:1.7; }
+
+    /* ====== REVIEWS ====== */
+    #rev { padding:var(--sec) 0; background:var(--cream); }
+    .rh { text-align:center; margin-bottom:2.5rem; }
+    .rh .lead { max-width:460px; margin:0 auto; }
+    .rg { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; }
+    .rc {
+      background:var(--white); border-radius:10px; padding:1.65rem;
+      box-shadow:0 4px 22px rgba(0,0,0,.07);
+      display:flex; flex-direction:column; gap:.9rem;
+      transition:transform .3s,box-shadow .3s;
+    }
+    .rc:hover { transform:translateY(-4px); box-shadow:0 10px 34px rgba(0,0,0,.12); }
+    .stars { color:var(--gold); font-size:.95rem; letter-spacing:.04em; }
+    .rc blockquote { font-family:var(--serif); font-style:italic; font-size:.98rem; line-height:1.65; color:var(--ink); flex:1; }
+    .rf  { display:flex; align-items:center; gap:.65rem; }
+    .rav { width:36px; height:36px; border-radius:50%; background:var(--cream); font-family:var(--serif); font-size:.9rem; font-weight:700; color:var(--acc); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .rnm { font-size:.82rem; font-weight:600; }
+    .rlc { font-size:.72rem; color:var(--mid); }
+    .rpl { margin-left:auto; font-size:.61rem; letter-spacing:.1em; text-transform:uppercase; color:var(--warm); }
+
+    /* ====== CTA ====== */
+    #cta { padding:clamp(3.5rem,9vw,6.5rem) 0; position:relative; overflow:hidden; }
+    #cta-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    #cta::before { content:''; position:absolute; inset:0; background:rgba(15,11,8,.82); z-index:1; }
+    .cb { position:relative; z-index:2; text-align:center; }
+    .cb .tag  { color:var(--gold); }
+    .cb .h2   { color:#fff; max-width:600px; margin:0 auto 1rem; }
+    .cb .lead { color:rgba(255,255,255,.62); max-width:460px; margin:0 auto 2.25rem; }
+    .cbtns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+    .btc {
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.9rem 1.75rem; border:1.5px solid rgba(255,255,255,.45);
+      color:rgba(255,255,255,.85); font-size:.82rem; letter-spacing:.06em;
+      border-radius:2px; transition:border-color .22s,color .22s;
+    }
+    .btc:hover { border-color:var(--gold); color:var(--gold); }
+
+    /* ====== KONTAKT ====== */
+    #kon { padding:var(--sec) 0; background:var(--white); }
+    .kg { display:grid; grid-template-columns:5fr 4fr; gap:4rem; align-items:start; }
+    .kf .h2 { font-size:clamp(1.55rem,4vw,2.3rem); margin-bottom:.55rem; }
+    .kf > p { color:var(--mid); font-size:.87rem; margin-bottom:1.65rem; }
+    .fr { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .fg { margin-bottom:.85rem; }
+    .fg label { display:block; font-size:.67rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--mid); margin-bottom:.38rem; }
+    .fg input,.fg select,.fg textarea {
+      width:100%; padding:.78rem .95rem;
+      border:1.5px solid rgba(0,0,0,.12); border-radius:4px;
+      font-family:var(--sans); font-size:.87rem; color:var(--ink);
+      background:var(--white); outline:none;
+      transition:border-color .2s,box-shadow .2s;
+    }
+    .fg input:focus,.fg select:focus,.fg textarea:focus {
+      border-color:var(--acc); box-shadow:0 0 0 3px rgba(184,115,64,.13);
+    }
+    .fg textarea { min-height:115px; resize:vertical; }
+    .fsub {
+      width:100%; padding:.95rem;
+      background:var(--acc); color:#fff; border:none;
+      font-family:var(--sans); font-size:.85rem; font-weight:500;
+      letter-spacing:.07em; border-radius:2px; cursor:pointer;
+      transition:background .22s; margin-top:.3rem;
+    }
+    .fsub:hover { background:var(--acc2); }
+
+    .ki h3 { font-family:var(--serif); font-size:1.4rem; font-weight:600; margin-bottom:1.65rem; line-height:1.25; }
+    .krow  { display:flex; gap:.9rem; margin-bottom:1.35rem; align-items:flex-start; }
+    .kico  {
+      width:40px; height:40px; border-radius:8px; background:var(--cream);
+      display:flex; align-items:center; justify-content:center; color:var(--acc); flex-shrink:0;
+    }
+    .klbl { font-size:.67rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--mid); margin-bottom:.12rem; }
+    .kval { font-size:.87rem; color:var(--ink); line-height:1.55; }
+    .kval a { color:var(--acc); }
+    .khours { margin-top:1.75rem; padding:1.25rem; background:var(--cream); border-radius:10px; }
+    .khours h4 { font-family:var(--serif); font-size:.98rem; margin-bottom:.7rem; }
+    .khr { display:flex; justify-content:space-between; font-size:.81rem; padding:.28rem 0; border-bottom:1px solid rgba(0,0,0,.07); }
+    .khr:last-child { border:none; }
+    .khr .kd { color:var(--mid); }
+
+    /* ====== FOOTER ====== */
+    footer { background:var(--dark); padding:2.25rem 0 1.2rem; }
+    .ftp {
+      display:grid; grid-template-columns:1.5fr 1fr 1fr;
+      gap:2.5rem; margin-bottom:2rem; padding-bottom:1.65rem;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .fbr .n1 { font-family:var(--serif); font-size:1.3rem; color:#fff; font-weight:600; }
+    .fbr .n2 { font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-bottom:.8rem; }
+    .fbr p   { font-size:.81rem; color:rgba(255,255,255,.42); line-height:1.7; }
+    .fcol h4 { font-size:.65rem; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:.95rem; }
+    .fcol li { margin-bottom:.45rem; }
+    .fcol a  { font-size:.81rem; color:rgba(255,255,255,.38); transition:color .2s; }
+    .fcol a:hover { color:var(--gold); }
+    .fbt { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:.65rem; font-size:.74rem; color:rgba(255,255,255,.28); }
+    .fbt a { color:rgba(255,255,255,.28); margin-left:1.2rem; transition:color .2s; }
+    .fbt a:hover { color:var(--gold); }
+
+    /* ====== RESPONSIVE ====== */
+    @media(max-width:1024px){
+      .lg { grid-template-columns:repeat(2,1fr); }
+      .gg { grid-template-rows:220px 200px; }
+      .rg { grid-template-columns:repeat(2,1fr); }
+      .rg .rc:nth-child(3){ display:none; }
+      .ftp { grid-template-columns:1fr 1fr; }
+      .fbr { grid-column:1/-1; }
+    }
+
+    @media(max-width:768px){
+      .nl,.nl .ncta { display:none; }
+      .brg { display:flex; }
+
+      .lh { grid-template-columns:1fr; }
+      .lg { grid-template-columns:1fr; gap:0; }
+      .li { aspect-ratio:16/9; }
+
+      .vi { grid-template-columns:1fr; gap:2.5rem; }
+      .vm { aspect-ratio:16/9; }
+      .vth { width:100px; }
+
+      .gg {
+        grid-template-columns:1fr 1fr;
+        grid-template-rows:repeat(3,190px);
+        gap:5px;
+      }
+      .g1{grid-column:1/2;grid-row:1/2;}
+      .g2{grid-column:2/3;grid-row:1/2;}
+      .g3{grid-column:1/3;grid-row:2/3;}
+      .g4{grid-column:1/2;grid-row:3/4;}
+      .g5{grid-column:2/3;grid-row:3/4;}
+
+      .ag { grid-template-columns:1fr 1fr; gap:2rem; }
+      .ag::before { display:none; }
+
+      .rg { grid-template-columns:1fr; }
+      .rg .rc:nth-child(3){ display:flex; }
+
+      .kg { grid-template-columns:1fr; gap:2.5rem; }
+      .fr { grid-template-columns:1fr; }
+
+      .ftp { grid-template-columns:1fr; gap:1.5rem; }
+      .fbr { grid-column:auto; }
+      .fbt { flex-direction:column; align-items:flex-start; }
+      .fbt a { margin-left:0; margin-right:1rem; }
+    }
+
+    @media(max-width:480px){
+      .ts { display:none; }
+      .ag { grid-template-columns:1fr; gap:1.75rem; }
+      .gg {
+        grid-template-columns:1fr;
+        grid-template-rows:repeat(5,210px);
+      }
+      .g1{grid-column:1;grid-row:1;}
+      .g2{grid-column:1;grid-row:2;}
+      .g3{grid-column:1;grid-row:3;}
+      .g4{grid-column:1;grid-row:4;}
+      .g5{grid-column:1;grid-row:5;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="container nw">
+    <a href="#hero" class="nb">
+      <div class="n1">Handwerker Wiebe</div>
+      <div class="n2">Fliesenleger · Delbrück</div>
+    </a>
+    <ul class="nl">
+      <li><a href="#leis">Leistungen</a></li>
+      <li><a href="#vort">Über uns</a></li>
+      <li><a href="#gal">Projekte</a></li>
+      <li><a href="#rev">Bewertungen</a></li>
+      <li><a href="#kon" class="ncta">Angebot anfragen</a></li>
+    </ul>
+    <button class="brg" id="brg" aria-label="Menü öffnen">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div id="drw" role="dialog" aria-label="Navigation">
+  <a href="#leis" class="dl">Leistungen</a>
+  <a href="#vort" class="dl">Über uns</a>
+  <a href="#gal"  class="dl">Projekte</a>
+  <a href="#rev"  class="dl">Bewertungen</a>
+  <a href="#kon"  class="dl" style="color:var(--gold)">Kontakt</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <img id="hero-img"
+    src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1800&q=80"
+    alt="Modernes Badezimmer – professionelle Fliesenarbeiten Delbrück"
+    fetchpriority="high" width="1800" height="1200"/>
+  <div class="ho"></div>
+  <div class="container hc">
+    <div class="hchip">Fliesenleger aus Delbrück</div>
+    <h1 class="hh1">Fliesen, die<br><em>überzeugen</em> –<br>Handwerk, dem<br>Sie vertrauen.</h1>
+    <p class="hsub">Vom Traumbad bis zur Traumterrasse – wir setzen Ihre Räume mit Präzision und Leidenschaft perfekt in Szene. Für Kunden in Delbrück und der Region Paderborn.</p>
+    <div class="hbtns">
+      <a href="#kon" class="bta">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.5z"/></svg>
+        Kostenloses Angebot
+      </a>
+      <a href="#gal" class="btb">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        Projekte ansehen
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section id="trust">
+  <div class="container">
+    <div class="trow">
+      <div class="ti"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>15+ Jahre Erfahrung</div>
+      <div class="ts"></div>
+      <div class="ti"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Zertifizierter Fachbetrieb</div>
+      <div class="ts"></div>
+      <div class="ti"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>200+ zufriedene Kunden</div>
+      <div class="ts"></div>
+      <div class="ti"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>5 Jahre Garantie</div>
+      <div class="ts"></div>
+      <div class="ti"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Delbrück &amp; Paderborn</div>
+    </div>
+  </div>
+</section>
+
+<!-- LEISTUNGEN -->
+<section id="leis" aria-labelledby="leis-h">
+  <div class="container">
+    <div class="lh">
+      <div class="r">
+        <span class="tag">Unsere Leistungen</span>
+        <h2 id="leis-h" class="h2">Jede Fliese.<br>Ein Meisterstück.</h2>
+      </div>
+      <p class="lead r" style="transition-delay:.1s">Von der modernen Wellness-Oase bis zur wetterbeständigen Terrasse – wir beherrschen das gesamte Spektrum professioneller Fliesenarbeiten, innen wie außen.</p>
+    </div>
+    <div class="lg">
+
+      <article class="lc r">
+        <div class="li">
+          <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=700&q=80" alt="Badsanierung Fliesenarbeiten Bad Delbrück" loading="lazy" width="700" height="525"/>
+        </div>
+        <div class="lb">
+          <div class="lic"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z"/><path d="M3 9a6 6 0 0 1 6-6h6a6 6 0 0 1 6 6"/></svg></div>
+          <h3>Badsanierung &amp; Wellness-Bad</h3>
+          <p>Ihr persönliches Spa zu Hause. Bodenebene Dusche, edle Wandfliesen, intelligente Nischen – komplett aus einer Hand und terminzuverlässig.</p>
+        </div>
+      </article>
+
+      <article class="lc r" style="transition-delay:.07s">
+        <div class="li">
+          <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=700&q=80" alt="Fliesenverlegung Küche Wohnzimmer Delbrück" loading="lazy" width="700" height="525"/>
+        </div>
+        <div class="lb">
+          <div class="lic"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+          <h3>Küche, Wohnzimmer &amp; Flur</h3>
+          <p>Küchenrückwand, Wohnzimmerboden im XXL-Format oder repräsentativer Eingangsbereich – wir finden das perfekte Fliesenbild für Ihr Zuhause.</p>
+        </div>
+      </article>
+
+      <article class="lc r" style="transition-delay:.14s">
+        <div class="li">
+          <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=700&q=80" alt="Großformatfliesen XXL verlegen Delbrück Paderborn" loading="lazy" width="700" height="525"/>
+        </div>
+        <div class="lb">
+          <div class="lic"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></div>
+          <h3>Großformat &amp; XXL-Fliesen</h3>
+          <p>Bis 120×120 cm, nahezu fugenlos, raumvergrößernd und zeitlos hochwertig. Wir sind spezialisiert auf deren präzise Verarbeitung.</p>
+        </div>
+      </article>
+
+      <article class="lc r" style="transition-delay:.21s">
+        <div class="li">
+          <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=700&q=80" alt="Terrassengestaltung Außenfliesen Delbrück" loading="lazy" width="700" height="525"/>
+        </div>
+        <div class="lb">
+          <div class="lic"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 0 0 1 1h3m10-11l2 2m-2-2v10a1 1 0 0 1-1 1h-3m-6 0a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1m-6 0h6"/></svg></div>
+          <h3>Terrasse &amp; Außenbereich</h3>
+          <p>Frost- und rutschfeste Außenfliesen für Terrassen, Balkone und Eingangsbereiche – repräsentativ, langlebig und wetterbeständig.</p>
+        </div>
+      </article>
+
+      <article class="lc r" style="transition-delay:.28s">
+        <div class="li">
+          <img src="https://images.unsplash.com/photo-1615971677499-5467cbab01b0?auto=format&fit=crop&w=700&q=80" alt="Naturstein Mosaik Verlegung Delbrück" loading="lazy" width="700" height="525"/>
+        </div>
+        <div class="lb">
+          <div class="lic"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <h3>Naturstein &amp; Mosaik</h3>
+          <p>Marmor, Travertin, Schiefer oder filigraner Mosaik – wir verarbeiten diese edlen Materialien fachgerecht und wunderschön.</p>
+        </div>
+      </article>
+
+      <article class="lc r" style="transition-delay:.35s">
+        <div class="li">
+          <img src="https://images.unsplash.com/photo-1503174971373-b1f69850bded?auto=format&fit=crop&w=700&q=80" alt="Altbausanierung Fliesenrenovierung Delbrück" loading="lazy" width="700" height="525"/>
+        </div>
+        <div class="lb">
+          <div class="lic"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+          <h3>Altbausanierung &amp; Renovierung</h3>
+          <p>Alte Fliesen raus, neues Lebensgefühl rein. Wir bereiten den Untergrund fachgerecht vor – auch in Altbauten mit anspruchsvollen Details.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- VORTEILE -->
+<section id="vort" aria-labelledby="vort-h">
+  <div class="container">
+    <div class="vi">
+      <div class="vv r2">
+        <div class="vm">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80" alt="Fliesenleger präzises Arbeiten Delbrück" loading="lazy" width="800" height="1067"/>
+        </div>
+        <div class="vth">
+          <img src="https://images.unsplash.com/photo-1615971677499-5467cbab01b0?auto=format&fit=crop&w=400&q=80" alt="Detailarbeit Fliesen Mosaik" loading="lazy" width="400" height="400"/>
+        </div>
+        <div class="vbdg">
+          <span class="big">15+</span>
+          <span class="sm">Jahre</span>
+        </div>
+      </div>
+      <div>
+        <span class="tag r">Warum Handwerker Wiebe</span>
+        <h2 id="vort-h" class="h2 r" style="transition-delay:.05s">Handwerk,<br>dem Sie<br>vertrauen können.</h2>
+        <div class="vlist">
+          <div class="vit r" style="transition-delay:.1s">
+            <div class="vnum">01</div>
+            <div><h3>Millimetergenaue Präzision</h3><p>Jede Fliese sitzt exakt. Wir kontrollieren Ebenheit, Flucht und Fugenmaß in jedem Arbeitsschritt – das Ergebnis überzeugt auch beim genauen Hinsehen.</p></div>
+          </div>
+          <div class="vit r" style="transition-delay:.15s">
+            <div class="vnum">02</div>
+            <div><h3>Ehrliche Beratung</h3><p>Das richtige Material für Ihren Stil und Ihr Budget – ohne teure Extras. Ein Ansprechpartner von der ersten Idee bis zur fertigen Fliese.</p></div>
+          </div>
+          <div class="vit r" style="transition-delay:.2s">
+            <div class="vnum">03</div>
+            <div><h3>Zuverlässige Termine</h3><p>Wir kommen, wenn wir es versprechen. Kein Warten, keine Überraschungen. Ihr Zeitplan ist unser Auftrag.</p></div>
+          </div>
+          <div class="vit r" style="transition-delay:.25s">
+            <div class="vnum">04</div>
+            <div><h3>Regional &amp; persönlich</h3><p>Als Betrieb aus Delbrück sind wir direkt vor Ihrer Tür – und auch nach dem Projekt erreichbar und ansprechbar.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIE -->
+<section id="gal" aria-labelledby="gal-h">
+  <div class="container">
+    <div class="gh">
+      <div class="r">
+        <span class="tag">Projektbeispiele</span>
+        <h2 id="gal-h" class="h2">Unsere Arbeiten<br>sprechen für sich.</h2>
+      </div>
+      <p class="lead r" style="transition-delay:.1s;max-width:360px">Eine Auswahl realisierter Projekte – vom Designbad bis zur Traumterrasse.</p>
+    </div>
+    <div class="gg r" style="transition-delay:.15s">
+
+      <div class="gi g1">
+        <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=900&q=80" alt="Modernes Badezimmer Fliesenarbeiten Delbrück" loading="lazy" width="900" height="600"/>
+        <div class="gio"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg></div>
+        <div class="glbl">Badsanierung · Delbrück</div>
+      </div>
+
+      <div class="gi g2">
+        <img src="https://images.unsplash.com/photo-1615971677499-5467cbab01b0?auto=format&fit=crop&w=600&q=80" alt="Mosaik Detailarbeit Fliesenleger Paderborn" loading="lazy" width="600" height="600"/>
+        <div class="gio"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg></div>
+        <div class="glbl">Naturstein Mosaik · Paderborn</div>
+      </div>
+
+      <div class="gi g3">
+        <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=700&q=85" alt="Terrassengestaltung Außenfliesen Delbrück" loading="lazy" width="700" height="933"/>
+        <div class="gio"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg></div>
+        <div class="glbl">Terrassengestaltung · Lippstadt</div>
+      </div>
+
+      <div class="gi g4">
+        <img src="https://images.unsplash.com/photo-1503174971373-b1f69850bded?auto=format&fit=crop&w=600&q=80" alt="Großformatfliesen Wohnzimmer Holzoptik Delbrück" loading="lazy" width="600" height="400"/>
+        <div class="gio"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg></div>
+        <div class="glbl">XXL-Fliesen Wohnzimmer · Delbrück</div>
+      </div>
+
+      <div class="gi g5">
+        <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=800&q=80" alt="Küchenrückwand Fliesen Küche Delbrück" loading="lazy" width="800" height="533"/>
+        <div class="gio"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg></div>
+        <div class="glbl">Küchenrückwand · Gütersloh</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABLAUF -->
+<section id="abl" aria-labelledby="abl-h">
+  <div class="container">
+    <div class="ah">
+      <span class="tag">So einfach geht's</span>
+      <h2 id="abl-h" class="h2 r">Ihr Weg zum neuen Traumbad</h2>
+      <p class="lead r" style="transition-delay:.1s">Von der ersten Idee bis zur fertigen Fliese – klar strukturiert, ohne Stress.</p>
+    </div>
+    <div class="ag">
+      <div class="as r" style="transition-delay:0s"><div class="anum">01</div><h3>Beratungsgespräch</h3><p>Wir kommen zu Ihnen, hören zu und besprechen Wünsche, Stil und Budget vor Ort.</p></div>
+      <div class="as r" style="transition-delay:.1s"><div class="anum">02</div><h3>Angebot &amp; Planung</h3><p>Sie erhalten ein detailliertes, verbindliches Festpreisangebot – transparent und fair.</p></div>
+      <div class="as r" style="transition-delay:.2s"><div class="anum">03</div><h3>Professionelle Umsetzung</h3><p>Wir arbeiten sauber, präzise und termingetreu. Sie werden täglich informiert.</p></div>
+      <div class="as r" style="transition-delay:.3s"><div class="anum">04</div><h3>Abnahme &amp; Garantie</h3><p>Gemeinsame Abnahme, vollständige Dokumentation und 5 Jahre Garantie.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="rev" aria-labelledby="rev-h">
+  <div class="container">
+    <div class="rh">
+      <span class="tag">Was Kunden sagen</span>
+      <h2 id="rev-h" class="h2 r">Vertrauen, das sich auszahlt.</h2>
+      <p class="lead r" style="transition-delay:.1s">Unsere Arbeit spricht durch die Erfahrungen unserer Kunden.</p>
+    </div>
+    <div class="rg">
+      <div class="rc r">
+        <div class="stars">★★★★★</div>
+        <blockquote>„Das Badezimmer ist der schönste Raum im Haus geworden. Die Jungs haben in drei Tagen ganze Arbeit geleistet – sauber, pünktlich und mit echter Liebe zum Detail. Wir hätten niemals gedacht, dass das Ergebnis so aussehen würde."</blockquote>
+        <div class="rf"><div class="rav">MH</div><div><div class="rnm">Monika &amp; Heinrich K.</div><div class="rlc">Delbrück · Badsanierung</div></div><div class="rpl">Google</div></div>
+      </div>
+      <div class="rc r" style="transition-delay:.1s">
+        <div class="stars">★★★★★</div>
+        <blockquote>„Endlich ein Handwerker, der wirklich kommt, wenn er kommt! Die Terrasse sieht aus wie aus einer Zeitschrift. Alle Nachbarn fragen, wer das gemacht hat. Klare Empfehlung!"</blockquote>
+        <div class="rf"><div class="rav">TS</div><div><div class="rnm">Thomas S.</div><div class="rlc">Paderborn · Terrassengestaltung</div></div><div class="rpl">Google</div></div>
+      </div>
+      <div class="rc r" style="transition-delay:.2s">
+        <div class="stars">★★★★★</div>
+        <blockquote>„Ich war skeptisch ob man in unserer alten Doppelhaushälfte noch schöne Ergebnisse erzielen kann – das Ergebnis hat uns überwältigt. Professionell, fair im Preis und ohne Überraschungen auf der Rechnung."</blockquote>
+        <div class="rf"><div class="rav">SR</div><div><div class="rnm">Sabine R.</div><div class="rlc">Lippstadt · Altbausanierung</div></div><div class="rpl">Google</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta" aria-label="Angebot anfordern">
+  <img id="cta-img"
+    src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1600&q=80"
+    alt="Modernes Zuhause mit Fliesenarbeiten Delbrück"
+    loading="lazy" width="1600" height="900"/>
+  <div class="container cb">
+    <span class="tag">Starten Sie jetzt</span>
+    <h2 class="h2 r">Bereit für Ihr<br>Traumprojekt?</h2>
+    <p class="lead r" style="transition-delay:.1s">Schildern Sie uns Ihr Vorhaben – wir melden uns innerhalb von 24 Stunden mit einem unverbindlichen Festpreisangebot.</p>
+    <div class="cbtns r" style="transition-delay:.2s">
+      <a href="#kon" class="bta">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.5z"/></svg>
+        Jetzt Angebot anfordern
+      </a>
+      <a href="tel:01721795889" class="btc">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.5z"/></svg>
+        0172 / 17 95 889
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section id="kon" aria-labelledby="kon-h">
+  <div class="container">
+    <div class="kg">
+      <div class="kf r2">
+        <span class="tag">Kontakt &amp; Anfrage</span>
+        <h2 id="kon-h" class="h2">Schreiben Sie uns –<br>wir antworten schnell.</h2>
+        <p>Beschreiben Sie Ihr Vorhaben kurz – wir melden uns innerhalb von 24 Stunden. Unverbindlich und kostenlos.</p>
+        <form id="kform" novalidate>
+          <div class="fr">
+            <div class="fg"><label for="vn">Vorname</label><input type="text" id="vn" name="vorname" placeholder="Max" autocomplete="given-name"/></div>
+            <div class="fg"><label for="nn">Nachname</label><input type="text" id="nn" name="nachname" placeholder="Mustermann" autocomplete="family-name"/></div>
+          </div>
+          <div class="fr">
+            <div class="fg"><label for="em">E-Mail</label><input type="email" id="em" name="email" placeholder="max@beispiel.de" autocomplete="email"/></div>
+            <div class="fg"><label for="tel">Telefon</label><input type="tel" id="tel" name="telefon" placeholder="0172 …" autocomplete="tel"/></div>
+          </div>
+          <div class="fg">
+            <label for="ls">Gewünschte Leistung</label>
+            <select id="ls" name="leistung">
+              <option value="">Bitte wählen …</option>
+              <option>Badsanierung</option>
+              <option>Fliesenverlegung Wohnbereich / Küche</option>
+              <option>Großformatfliesen</option>
+              <option>Terrasse &amp; Außenbereich</option>
+              <option>Naturstein &amp; Mosaik</option>
+              <option>Altbausanierung</option>
+              <option>Sonstiges</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label for="msg">Ihre Nachricht</label>
+            <textarea id="msg" name="nachricht" placeholder="Beschreiben Sie Ihr Vorhaben – Raumgröße, Material-Ideen, Wunschtermin …"></textarea>
+          </div>
+          <button type="submit" class="fsub" id="fsbtn">Anfrage kostenfrei senden →</button>
+        </form>
+      </div>
+
+      <div class="ki r3">
+        <h3>Direkter Draht<br>zum Profi.</h3>
+        <div class="krow"><div class="kico"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.5z"/></svg></div><div><div class="klbl">Telefon</div><div class="kval"><a href="tel:01721795889">0172 / 17 95 889</a></div></div></div>
+        <div class="krow"><div class="kico"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="klbl">E-Mail</div><div class="kval"><a href="mailto:info@handwerker-delbrueck.de">info@handwerker-delbrueck.de</a></div></div></div>
+        <div class="krow"><div class="kico"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="klbl">Adresse</div><div class="kval">Schlingerstraße 21<br>33129 Delbrück</div></div></div>
+        <div class="krow"><div class="kico"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="klbl">Einsatzgebiet</div><div class="kval">Delbrück · Paderborn · Lippstadt<br>Gütersloh · ca. 40 km Umkreis</div></div></div>
+        <div class="khours">
+          <h4>Erreichbarkeit</h4>
+          <div class="khr"><span class="kd">Mo – Fr</span><span>07:00 – 18:00 Uhr</span></div>
+          <div class="khr"><span class="kd">Samstag</span><span>08:00 – 14:00 Uhr</span></div>
+          <div class="khr"><span class="kd">Sonntag</span><span>Nur nach Vereinbarung</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="ftp">
+      <div class="fbr">
+        <div class="n1">Handwerker Wiebe</div>
+        <div class="n2">Fliesenleger · Delbrück</div>
+        <p>Professionelle Fliesenarbeiten in Delbrück und der Region Paderborn. Qualität, Präzision und Zuverlässigkeit – seit über 15 Jahren.</p>
+      </div>
+      <div class="fcol">
+        <h4>Leistungen</h4>
+        <ul>
+          <li><a href="#leis">Badsanierung</a></li>
+          <li><a href="#leis">Küche &amp; Wohnbereich</a></li>
+          <li><a href="#leis">Großformatfliesen</a></li>
+          <li><a href="#leis">Terrasse &amp; Außen</a></li>
+          <li><a href="#leis">Naturstein &amp; Mosaik</a></li>
+          <li><a href="#leis">Altbausanierung</a></li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <h4>Unternehmen</h4>
+        <ul>
+          <li><a href="#vort">Über uns</a></li>
+          <li><a href="#gal">Projektbeispiele</a></li>
+          <li><a href="#abl">So arbeiten wir</a></li>
+          <li><a href="#rev">Kundenstimmen</a></li>
+          <li><a href="#kon">Kontakt</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fbt">
+      <span>© 2025 Handwerker Wiebe, Delbrück. Alle Rechte vorbehalten.</span>
+      <div><a href="#">Impressum</a><a href="#">Datenschutz</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('solid', scrollY > 50), {passive: true});
+
+  // Burger / drawer
+  const brg = document.getElementById('brg');
+  const drw = document.getElementById('drw');
+  brg.addEventListener('click', () => {
+    brg.classList.toggle('open');
+    drw.classList.toggle('open');
+    document.body.style.overflow = drw.classList.contains('open') ? 'hidden' : '';
+  });
+  document.querySelectorAll('#drw .dl').forEach(a => a.addEventListener('click', () => {
+    brg.classList.remove('open');
+    drw.classList.remove('open');
+    document.body.style.overflow = '';
+  }));
+
+  // Scroll reveal
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }});
+  }, {threshold: 0.1, rootMargin: '0px 0px -24px 0px'});
+  document.querySelectorAll('.r,.r2,.r3').forEach(el => io.observe(el));
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({behavior: 'smooth'}); }
+  }));
+
+  // Form
+  document.getElementById('kform').addEventListener('submit', e => {
+    e.preventDefault();
+    const btn = document.getElementById('fsbtn');
+    btn.textContent = '✓ Anfrage gesendet – wir melden uns bald!';
+    btn.style.background = '#7a5230';
+    btn.disabled = true;
+  });
+</script>
+</body>
+</html>
